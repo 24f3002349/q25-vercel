@@ -15,6 +15,17 @@ CORS_HEADERS = {
     "Access-Control-Max-Age": "86400",
 }
 
+@app.get("/")
+@app.get("/api")
+def health():
+    return {"status": "ok"}
+
+
+@app.post("/")
+@app.post("/api")
+def calculate_metrics(data: RequestData):
+    ...  # your existing body unchanged
+
 @app.middleware("http")
 async def add_cors_headers(request: Request, call_next):
     if request.method == "OPTIONS":
