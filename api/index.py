@@ -70,10 +70,13 @@ def calculate_metrics(data: RequestData):
         latencies = [row["latency_ms"] for row in rows]
         uptimes = [row["uptime_pct"] for row in rows]
 
+ 
+
+
         results[region] = {
-            "avg_latency": sum(latencies) / len(latencies),
-            "p95_latency": percentile(latencies, 0.95),
-            "avg_uptime": sum(uptimes) / len(uptimes),
+            "avg_latency": round(sum(latencies) / len(latencies), 2),
+            "p95_latency": round(percentile(latencies, 0.95), 2),
+            "avg_uptime": round(sum(uptimes) / len(uptimes), 2),
             "breaches": sum(l > data.threshold_ms for l in latencies),
         }
 
