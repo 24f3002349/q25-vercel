@@ -77,4 +77,4 @@ def calculate_metrics(data: RequestData):
             "breaches": sum(l > data.threshold_ms for l in latencies),
         }
 
-    return results
+    return {"regions": results}
