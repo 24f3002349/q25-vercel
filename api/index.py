@@ -6,8 +6,7 @@ app = FastAPI()
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    "Access-Control-Expose-Headers": "Access-Control-Allow-Origin",
+    "Access-Control-Allow-Headers": "*",
 }
 
 
@@ -21,9 +20,46 @@ async def add_cors_headers(request: Request, call_next):
     return response
 
 
-# ---- PASTE YOUR EXISTING DATA = [ ... ] LIST HERE ----
 DATA = [
-    # (apac, emea, amer rows exactly as before)
+    # APAC
+    {"region": "apac", "latency_ms": 142.59, "uptime_pct": 98.934},
+    {"region": "apac", "latency_ms": 179.8, "uptime_pct": 97.893},
+    {"region": "apac", "latency_ms": 215.91, "uptime_pct": 98.397},
+    {"region": "apac", "latency_ms": 178.63, "uptime_pct": 97.461},
+    {"region": "apac", "latency_ms": 186.08, "uptime_pct": 99.115},
+    {"region": "apac", "latency_ms": 114.68, "uptime_pct": 97.719},
+    {"region": "apac", "latency_ms": 149.14, "uptime_pct": 97.863},
+    {"region": "apac", "latency_ms": 223.36, "uptime_pct": 99.413},
+    {"region": "apac", "latency_ms": 187.98, "uptime_pct": 99.426},
+    {"region": "apac", "latency_ms": 151.99, "uptime_pct": 97.375},
+    {"region": "apac", "latency_ms": 146.62, "uptime_pct": 98.366},
+    {"region": "apac", "latency_ms": 137.77, "uptime_pct": 97.49},
+    # EMEA
+    {"region": "emea", "latency_ms": 177.32, "uptime_pct": 98.696},
+    {"region": "emea", "latency_ms": 142.29, "uptime_pct": 99.399},
+    {"region": "emea", "latency_ms": 235.55, "uptime_pct": 97.494},
+    {"region": "emea", "latency_ms": 190.78, "uptime_pct": 98.012},
+    {"region": "emea", "latency_ms": 132.73, "uptime_pct": 98.522},
+    {"region": "emea", "latency_ms": 135.03, "uptime_pct": 99.213},
+    {"region": "emea", "latency_ms": 178.03, "uptime_pct": 98.607},
+    {"region": "emea", "latency_ms": 149.1, "uptime_pct": 98.283},
+    {"region": "emea", "latency_ms": 177.06, "uptime_pct": 97.273},
+    {"region": "emea", "latency_ms": 177.71, "uptime_pct": 97.61},
+    {"region": "emea", "latency_ms": 227.23, "uptime_pct": 97.471},
+    {"region": "emea", "latency_ms": 202.31, "uptime_pct": 97.362},
+    # AMER
+    {"region": "amer", "latency_ms": 166.87, "uptime_pct": 99.01},
+    {"region": "amer", "latency_ms": 169.75, "uptime_pct": 99.161},
+    {"region": "amer", "latency_ms": 194.33, "uptime_pct": 98.437},
+    {"region": "amer", "latency_ms": 220.06, "uptime_pct": 98.786},
+    {"region": "amer", "latency_ms": 166.01, "uptime_pct": 97.652},
+    {"region": "amer", "latency_ms": 134.92, "uptime_pct": 98.653},
+    {"region": "amer", "latency_ms": 141.25, "uptime_pct": 98.013},
+    {"region": "amer", "latency_ms": 129.35, "uptime_pct": 97.808},
+    {"region": "amer", "latency_ms": 218.22, "uptime_pct": 97.447},
+    {"region": "amer", "latency_ms": 228.51, "uptime_pct": 97.855},
+    {"region": "amer", "latency_ms": 153.25, "uptime_pct": 99.485},
+    {"region": "amer", "latency_ms": 206.54, "uptime_pct": 99.034},
 ]
 
 
@@ -69,9 +105,6 @@ def calculate_metrics(data: RequestData):
 
         latencies = [row["latency_ms"] for row in rows]
         uptimes = [row["uptime_pct"] for row in rows]
-
- 
-
 
         results[region] = {
             "avg_latency": round(sum(latencies) / len(latencies), 2),
